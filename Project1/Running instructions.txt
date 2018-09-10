@@ -1,0 +1,12 @@
+— Project1_general.o and Project1_special.o usage —
+
+To execute the file you need to fill in exponent m as command line argument where m gives the program n = 10^m
+
+$   ./Project1b_general.o 4
+
+Executing the file writes the result to file power-m.txt where
+Column 1 = x
+Column 2 = solution U
+Column 3 = exact solution U
+Column 4 = log of the relative error
+

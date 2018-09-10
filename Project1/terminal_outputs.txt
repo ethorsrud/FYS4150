@@ -1,0 +1,16 @@
+Eiriks-MacBook-Pro:Project1 Eirik$ ./Project1_general.o 1
+Tridiagonal general case calculations took: 4e-06 Seconds
+LU Decomposition took: 3.6e-05 Seconds
+Now writing to file power-1.txt ...
+
+
+Eiriks-MacBook-Pro:Project1 Eirik$ ./Project1_general.o 2
+Tridiagonal general case calculations took: 7e-06 Seconds
+LU Decomposition took: 0.001338 Seconds
+Now writing to file power-2.txt ...
+
+
+Eiriks-MacBook-Pro:Project1 Eirik$ ./Project1_general.o 3
+Tridiagonal general case calculations took: 3.8e-05 Seconds
+LU Decomposition took: 0.111587 Seconds
+Now writing to file power-3.txt ...
