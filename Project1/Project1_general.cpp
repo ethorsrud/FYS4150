@@ -6,7 +6,6 @@
 #include "time.h"
 #include <armadillo>
 
-#define ARMA_64BIT_WORD 1
 using namespace arma;
 using namespace std;
 ofstream ofile;
