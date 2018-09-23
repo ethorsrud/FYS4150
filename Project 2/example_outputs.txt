@@ -1,0 +1,60 @@
+$./jacobi_rotation.o 100
+
+ 1 for buckling beam
+ 2 for one electron quantum dots
+ 3 for two electron quantum dots
+
+1
+
+Unit test for finding max off-diagonal element has passed
+
+Unit test for checking orthogonality has passed
+
+Calculating: 18745 iterations
+
+Diagonalizing matrix took: 0.811277 Seconds
+
+lambda1 = 9.67435 lambda2 = 38.6881 lambda3 = 87.013
+
+-----------------------------------------------------
+
+$./jacobi_rotation.o 100
+
+ 1 for buckling beam
+ 2 for one electron quantum dots
+ 3 for two electron quantum dots
+
+2
+
+Unit test for finding max off-diagonal element has passed
+
+Unit test for checking orthogonality has passed
+
+Calculating: 17627 iterations
+
+Diagonalizing matrix took: 0.755023 Seconds
+
+lambda1 = 2.99922 lambda2 = 6.99609 lambda3 = 10.9906
+
+-----------------------------------------------------
+
+$./jacobi_rotation.o 100
+
+ 1 for buckling beam
+ 2 for one electron quantum dots
+ 3 for two electron quantum dots
+
+3
+
+omega_r = 
+0.5
+
+Unit test for finding max off-diagonal element has passed
+
+Unit test for checking orthogonality has passed
+
+Calculating: 17664 iterations
+
+Diagonalizing matrix took: 0.756637 Seconds
+
+lambda1 = 2.23065 lambda2 = 4.16333 lambda3 = 6.35172
