@@ -1,4 +1,4 @@
-$./jacobi_rotation.o 100
+$./jacobi_rotation.x 100
 
  1 for buckling beam
  2 for one electron quantum dots
@@ -18,7 +18,7 @@ lambda1 = 9.67435 lambda2 = 38.6881 lambda3 = 87.013
 
 -----------------------------------------------------
 
-$./jacobi_rotation.o 100
+$./jacobi_rotation.x 100
 
  1 for buckling beam
  2 for one electron quantum dots
@@ -38,7 +38,7 @@ lambda1 = 2.99922 lambda2 = 6.99609 lambda3 = 10.9906
 
 -----------------------------------------------------
 
-$./jacobi_rotation.o 100
+$./jacobi_rotation.x 100
 
  1 for buckling beam
  2 for one electron quantum dots
