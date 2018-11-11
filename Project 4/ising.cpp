@@ -8,19 +8,20 @@
 Ising::Ising(double j, int l, double t)
 {
     arma_rng::set_seed(2);
-    J = j;
-    L = l;
-    T = t;
-    k = 1.38064852E-23;
-    T = T*J/k;
+    J = j; //interaction strength
+    L = l; //Lattice size
+    T = t; //Temperature
+    k = 1.38064852E-23; //Boltzmanns constant
+    T = T*J/k; //Temperature in units of TJ/k
     beta = 1./(T*k);
-    temp = t;
+    temp = t; //Temperature
     E = 0;
     M = 0;
-    state = create_state();
-    double avg[5];
+    state = create_state(); //Random state
+    double avg[5]; //Temporary expectation value array
     energy();
     magnetization();
+    //Delta energy array to save computational time
     for (int deltaE = -8; deltaE <= 8; deltaE++) {
         w[deltaE+8] = 0;
     }
@@ -30,6 +31,7 @@ Ising::Ising(double j, int l, double t)
 }
 
 mat Ising::create_state()
+//Function for creating a random Ising configuration
 {
     mat R = randu(L,L);
     for(int i = 0;i<L;i++){
@@ -46,7 +48,7 @@ mat Ising::create_state()
 }
 
 void Ising::energy(){
-
+//Function for calculating the energy of the system
 //Calculating the horizontal energies
     for(int i = 0;i<L;i++){
         for(int j = 0;j<L-1;j++){
@@ -66,10 +68,12 @@ void Ising::energy(){
 }
 
 void Ising::magnetization(){
+    //Function for calculating the magnetization of the system
     M = accu(state);
 }
 
 void Ising::reset(){
+    //Function for resetting the temporary expectation values and MC-steps
     for(int i = 0; i<5;i++){
         avg[i] = 0;
     }
@@ -78,6 +82,7 @@ void Ising::reset(){
 
 
 void Ising::metropolis_step(){
+    //Function for performing the metropolis algorithm
     double row; double col;
     double spinup;double spindown; double spinleft; double spinright;
     for(int i = 0; i<(L*L);i++){
@@ -99,22 +104,12 @@ void Ising::metropolis_step(){
             spinright = 0;
         }
 
-        /*
-        cout<<"("<<row<<","<<col<<")"<<endl;
-        cout<<"("<<spinup<<","<<col<<")"<<endl;
-        cout<<"("<<spindown<<","<<col<<")"<<endl;
-        cout<<"("<<row<<","<<spinleft<<")"<<endl;
-        cout<<"("<<row<<","<<spinright<<")"<<endl;
-        */
         dE = 2*J*state(row,col)*(state(spinup,col)+state(spindown,col)+state(row,spinleft)+state(row,spinright));
         if((dE<=0) || (((double) rand() / (RAND_MAX))<= w[dE+8])){
             state(row,col) = -state(row,col);
-            //state.print();
-            //cout<<row<<" "<<col<<endl;
             E += dE;
             M += 2*state(row,col);
             accepted += 1;
-
         }
 
     }
@@ -122,6 +117,7 @@ void Ising::metropolis_step(){
 }
 
 vec Ising::returnexp(){
+    //Function for returning the expectation values from the temporary avg array
     vec expvalues(5);
     expvalues(0) = avg[0]/MCsteps;
     expvalues(1) = avg[1]/MCsteps;
@@ -132,6 +128,7 @@ vec Ising::returnexp(){
 }
 
 void Ising::expvalues(int steps,string filename){
+    //Function for calculating the expectation values and writing the energy occurance to file
     ofstream probs;
     probs.open(filename);
     for(int i = 0; i<steps;i++){
@@ -145,6 +142,7 @@ void Ising::expvalues(int steps,string filename){
 }
 
 void Ising::expvalues(int steps){
+    //Function for calculating the expectation values only
     for(int i = 0; i<steps;i++){
         metropolis_step();
         avg[0] += E; avg[1] += E*E;
@@ -153,25 +151,9 @@ void Ising::expvalues(int steps){
     }
 }
 
-vec Ising::E_probability(int steps,vec energies,int e_step){
-    int intsteps = 50000;
-    vec counter = zeros(e_step);
-    for(int i = 0; i<intsteps;i++){
-        metropolis_step();
-    }
-    reset();
-    for(int i = 0; i<e_step;i++){
-        for(int j = 0; j<steps;j++){
-            metropolis_step();
-            if(E==energies(i)){
-                counter(i) += 1;
-            }
-        }
-    }
-    return counter;
-}
 
 void Ising::E_prob(int steps,string filename){
+    //Function for calculating the probability of energy occurance after performing 100000 initial steps.
     int intsteps = 100000;
     for(int i = 0; i<intsteps;i++){
         metropolis_step();
