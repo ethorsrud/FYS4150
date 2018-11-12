@@ -7,6 +7,8 @@
 #include <armadillo>
 #include "ising.h"
 #include <mpi.h>
+#include <stdlib.h>
+#include <stdio.h>
 using namespace arma;
 
 using namespace std;
@@ -142,6 +144,7 @@ int main(int nargs, char* args[])
 
     int rank_steps = steps/proc;
     ofstream outfile;
+    //Change text file below into integer value L above
     outfile.open("L100.txt");
 
     for(double T = init_T; T <= final_T; T+=T_step){
@@ -168,5 +171,4 @@ int main(int nargs, char* args[])
     }
     MPI_Finalize(); outfile.close();
     //TASK E - END
-
 }
